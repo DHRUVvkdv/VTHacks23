@@ -17,12 +17,12 @@ def display_page1():
         st.session_state.current_page = "Home"
     
 st.markdown("""
-    <a href="http://172.31.28.68:3000/login" target="_blank">Login Page</a>
+    <a href="http://172.29.6.73:3000/login" target="_blank">Login Page</a>
 """, unsafe_allow_html=True)
 
 
 st.markdown("""
-    <a href="http://172.31.28.68:3000/logout" target="_blank">Logout Page</a>
+    <a href="http://172.29.6.73:3000/logout" target="_blank">Logout Page</a>
 """, unsafe_allow_html=True)
 
 # st.markdown("""

@@ -10,7 +10,7 @@ st.header("Welcome to Stonks!")
 st.sidebar.success("Please Log In First")
 
 st.markdown("""
-    <a href="http://172.31.28.68:3000/login" target="_blank">Login</a>
+    <a href="http://172.29.6.73:3000/login" target="_blank">Login</a>
 """, unsafe_allow_html=True)
 
 

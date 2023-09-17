@@ -56,6 +56,6 @@ else:
 
 
 st.markdown("""
-    <a href="http://172.31.28.68:3000/logout" target="_blank">Logout</a>
+    <a href="http://172.29.6.73:3000/logout" target="_blank">Logout</a>
 """, unsafe_allow_html=True)
 
