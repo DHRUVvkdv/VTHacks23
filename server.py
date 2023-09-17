@@ -132,8 +132,10 @@ def logout():
 @app.route("/final-logout")
 def final_logout():
     session.clear()
-    return render_template("logout.html")
-    # return redirect("http://localhost:8501/")
+    # with open("output.txt", "w") as file:
+    #     file.write("")
+    # return render_template("logout.html")
+    return redirect("http://localhost:8501/")
 
 
 
