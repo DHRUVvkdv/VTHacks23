@@ -51,7 +51,7 @@ def home():
         file.write(pretty_data)
     # return render_template(
     return redirect(    
-        "http://localhost:8501/Page_1"
+        "http://localhost:8501/Home"
         # session=session.get("user"),
         # # pretty=json.dumps(session.get("user"), indent=4),
         # pretty=pretty_data,

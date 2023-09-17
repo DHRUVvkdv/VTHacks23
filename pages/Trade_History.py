@@ -1,9 +1,11 @@
 import streamlit as st
+import random
 import pandas as pd
 import json
 
+# Assuming you have the Price_Functions as pf imported
+import Price_Functions as pf
 import DB_Access as dbs
-import Price_Functions as pf  # Import the necessary module
 
 with open('output.txt', 'r') as file:
     # Load the contents of the file as a JSON object
@@ -11,29 +13,7 @@ with open('output.txt', 'r') as file:
 
 user_id = data["userinfo"]["email"]
 
-users_db = dbs.db.Users
-
-existing_user = users_db.find_one({"email_id": user_id})
-if not existing_user:
-    # If the user doesn't exist, create a new user record
-    new_user = {
-        "email_id": user_id,
-        "budget": 100000,
-        "is_infinite": False
-    }
-    users_db.insert_one(new_user)
-    st.write(f"Welcome {user_id}! A new account has been created for you.")
-
-st.header("Hello There")
-st.write("If you're looking to begin trading, head over to TRADES")
-st.write("Check out your PORTFOLIO")
-
 st.write("### Trade History")
-
-# Read the user's ID from the output file
-with open('output.txt', 'r') as file:
-    data = json.load(file)
-user_id = data["userinfo"]["email"]
 
 def generate_trade_history_data(user_id):
     trades = dbs.db.Trades

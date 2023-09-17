@@ -70,9 +70,12 @@ if not user_data:
     st.write(f"Error: User {user_id} not found in the database.")
 else:
     user_budget = user_data["budget"]
+    is_infinite_budget = user_data["is_infinite"]
+
+if not is_infinite_budget:
+    st.write("Budget: $", str(user_budget))
 
 
-st.write("Budget: $", str(user_budget)) 
 
 # Check if Quantity input is a valid number
 try:
@@ -91,11 +94,12 @@ if proper_stock_id and valid_qty:
 with trade_col_1:
     # BUY button
     if st.button("BUY") and valid_qty:
-        if trade_value <= user_budget:
+        if (trade_value <= user_budget) or is_infinite_budget:
             dbs.execute_trade(user_id, stock_id, qty_as_int, float(pf.get_price(stock_id, True)), True)
             #edit budget here
-            new_budget = user_budget - trade_value
-            users_db.update_one({"email_id": user_id}, {"$set": {"budget": new_budget}})
+            if is_infinite_budget == False:
+                new_budget = user_budget - trade_value
+                users_db.update_one({"email_id": user_id}, {"$set": {"budget": new_budget}})
             
             st.write(qty + " stocks of " + stock_id + " bought by " + user_id)
         else:
@@ -108,8 +112,9 @@ with trade_col_2:
         if current_quantity >= qty_as_int:
             dbs.execute_trade(user_id, stock_id, qty_as_int, float(pf.get_price(stock_id, True)), False)
             st.write("Sold by " + user_id)
-            new_budget = user_budget + trade_value
-            users_db.update_one({"email_id": user_id}, {"$set": {"budget": new_budget}})
+            if is_infinite_budget == False:
+                new_budget = user_budget + trade_value
+                users_db.update_one({"email_id": user_id}, {"$set": {"budget": new_budget}})
         else:
             st.write("Error: You don't have enough stock to sell.")
 
